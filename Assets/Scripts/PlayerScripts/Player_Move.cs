@@ -61,13 +61,13 @@ public class Player_Move : MonoBehaviour
     {
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
-        var movVector = new Vector3(vertical, 0, -horizontal);
+        var movVector = new Vector3(horizontal, 0, -vertical);
         
         transform.Translate(movVector * (_speed * Time.deltaTime));
         
         var position = transform.position;
         var yClamp = Mathf.Clamp(position.y, -7f, 7f);
-        var xClamp = Mathf.Clamp(position.x, -13f, 0f);
+        var xClamp = Mathf.Clamp(position.x, -13f, 13f);
         
         position = new Vector3(xClamp, yClamp, 0);
         transform.position = position;
