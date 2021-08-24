@@ -67,7 +67,7 @@ public class Player_Move : MonoBehaviour
         
         var position = transform.position;
         var yClamp = Mathf.Clamp(position.y, -7f, 7f);
-        var xClamp = Mathf.Clamp(position.x, -13f, 13f);
+        var xClamp = Mathf.Clamp(position.x, -11.5f, 11.5f);
         
         position = new Vector3(xClamp, yClamp, 0);
         transform.position = position;

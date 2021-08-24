@@ -16,4 +16,3 @@ MonoBehaviour:
   numberOfPrefabsToCreate: 2
   spawnPoints:
   - {x: 15.6, y: 0, z: 0}
-  - {x: 19, y: 0, z: 0}

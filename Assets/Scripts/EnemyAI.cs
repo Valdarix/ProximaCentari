@@ -1,18 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
+
+using System;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour, IDamagable
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float _speed = 1f;
+    private Collider _collider;
+    private const int CrashDamageValue = 9999;
+    public int Health { get; set; }
+    [SerializeField] private int _health = 10;
+
+    private void Start()
     {
-        
+        Health = _health;
+        _collider = GetComponent<Collider>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        transform.Translate(Vector3.forward * (5f * Time.deltaTime));
+        transform.Translate(Vector3.forward * (_speed * Time.deltaTime));
+    }
+
+    private void OnBecameVisible()
+    {
+        _collider.gameObject.SetActive(true);
+    }
+    
+    private void OnBecameInvisible()
+    {
+        _collider.gameObject.SetActive(false);
+        Destroy(gameObject);
+    }
+    public void Damage(int damageAmount)
+    {
+        Health -= damageAmount;
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //only call this logic if the enemy rams the player.
+        if (other.CompareTag("Player"))
+        {
+            var hitTarget = other.GetComponent<Player_Health>().GetComponent<IDamagable>();
+            hitTarget?.Damage(CrashDamageValue); // this is bad! Magic numbers are ba
+        }
     }
 }

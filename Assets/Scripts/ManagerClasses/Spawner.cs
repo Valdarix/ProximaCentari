@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour
         
             for (var i = 0; i < wave.numberOfPrefabsToCreate; i++)
             {
-                
+                yield return new WaitForSeconds(1.5f);
                 var randomEntity = Random.Range(0, entityToSpawn.Length);
                 // Creates an instance of the prefab at the current spawn point.
                 var currentEntity = Instantiate(entityToSpawn[randomEntity], wave.spawnPoints[currentSpawnPointIndex], entityToSpawn[randomEntity].transform.rotation);

@@ -23,7 +23,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlayClip(int clipLevelToPlay)
     {
-       
         _audioSource.clip = music[clipLevelToPlay];
         _audioSource.Play();
     }

@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
     
-    void Start()
+    public void StartMusic()
     {
         AudioManager.Instance.PlayClip(0);
     }

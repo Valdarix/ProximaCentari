@@ -28,12 +28,6 @@ public class SceneController : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    private void Start()
-    {
-        SceneManager.LoadSceneAsync("MainMenu");
-
-    }
-
     public void LoadGameScene(string sceneName)
     {
         SceneManager.LoadSceneAsync(sceneName);
