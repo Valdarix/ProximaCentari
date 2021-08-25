@@ -20,4 +20,9 @@ public class Weapon : MonoBehaviour
         hitTarget?.Damage(_damageAmount);
         Destroy(gameObject);
     }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }

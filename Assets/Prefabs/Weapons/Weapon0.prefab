@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1286546752}
   - component: {fileID: -5079662601541089573}
   - component: {fileID: 4090859374188962580}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapon0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd59594f82080946868323251d8373a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 20
   _damageAmount: 10
 --- !u!82 &1286546752
 AudioSource:

@@ -53,7 +53,7 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 0
-    value: 0
+    value: 0.89
   tint:
     overrideState: 0
     value: 0
@@ -61,14 +61,14 @@ MonoBehaviour:
     overrideState: 0
     value: {r: 0.5943396, g: 0.0028034954, b: 0.0028034954, a: 1}
   hueShift:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: -20.59
   saturation:
     overrideState: 0
     value: 0
   brightness:
     overrideState: 1
-    value: 0
+    value: 100
   postExposure:
     overrideState: 0
     value: 0

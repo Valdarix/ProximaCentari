@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player_Health : MonoBehaviour, IDamagable
 {
     [SerializeField] private float _speed = 1f;
-    [SerializeField] private Collider _collider;
+   
     [SerializeField] private int _health;
     public int Health { get; set; }
 

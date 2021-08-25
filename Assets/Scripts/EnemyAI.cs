@@ -42,11 +42,13 @@ public class EnemyAI : MonoBehaviour, IDamagable
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.name);
         //only call this logic if the enemy rams the player.
         if (other.CompareTag("Player"))
         {
             var hitTarget = other.GetComponent<Player_Health>().GetComponent<IDamagable>();
-            hitTarget?.Damage(CrashDamageValue); // this is bad! Magic numbers are ba
+            hitTarget?.Damage(CrashDamageValue); 
+            Destroy(gameObject);
         }
     }
 }
