@@ -21,26 +21,33 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator SpawnEntities()
     {
+        var enemyToSpawn = -1;
+        var currentWave = 0;
         foreach (var wave in spawnManagerValues)
         {
-            yield return new WaitForSeconds(1.5f);
-            var currentSpawnPointIndex = 0;
-        
+            yield return new WaitForSeconds(1f);
+
             for (var i = 0; i < wave.numberOfPrefabsToCreate; i++)
             {
-                yield return new WaitForSeconds(1.5f);
-                var randomEntity = Random.Range(0, entityToSpawn.Length);
-                // Creates an instance of the prefab at the current spawn point.
-                var currentEntity = Instantiate(entityToSpawn[randomEntity], wave.spawnPoints[currentSpawnPointIndex], entityToSpawn[randomEntity].transform.rotation);
+                yield return new WaitForSeconds(1f);
 
-                // Sets the name of the instantiated entity to be the string defined in the ScriptableObject and then appends it with a unique number. 
-                currentEntity.name = wave.prefabName + _instanceNumber;
+                if (currentWave < 4)
+                {
+                    enemyToSpawn = currentWave;
+                }
+                else
+                {
+                    enemyToSpawn = Random.Range(0, entityToSpawn.Length);
+                }
 
-                // Moves to the next spawn point index. If it goes out of range, it wraps back to the start.
-                currentSpawnPointIndex = (currentSpawnPointIndex + 1) % wave.spawnPoints.Length;
+                var currentEntity = Instantiate(entityToSpawn[enemyToSpawn], wave.spawnPoint, entityToSpawn[enemyToSpawn].transform.rotation);
+              
+                currentEntity.name = wave.prefabName + i;
+                currentEntity.transform.parent = transform.parent;
 
                 _instanceNumber++;
             }
+            currentWave++;
         }
     }
 }

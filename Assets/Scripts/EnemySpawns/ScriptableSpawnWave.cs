@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScriptableSpawnWave : ScriptableObject
 {
     public string prefabName;
-   
+    public float spawnRate;
     public int numberOfPrefabsToCreate;
-    public Vector3[] spawnPoints;
+    public Vector3 spawnPoint;
 }

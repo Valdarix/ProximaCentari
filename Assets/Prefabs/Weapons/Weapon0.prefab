@@ -121,7 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  _damageAmount: 10
+  _damageAmount: 5
+  _fireRate: 0.5
 --- !u!82 &1286546752
 AudioSource:
   m_ObjectHideFlags: 0

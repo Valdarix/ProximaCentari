@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private int _damageAmount;
+    public float _fireRate = 1f;
     
     // Update is called once per frame
     void Update()

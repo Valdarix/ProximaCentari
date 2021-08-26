@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour, IDamagable
 {
-    [SerializeField] private float _speed = 1f;
+    private float _speed = 1f;
     private Collider _collider;
     private const int CrashDamageValue = 9999;
     public int Health { get; set; }
@@ -42,7 +42,6 @@ public class EnemyAI : MonoBehaviour, IDamagable
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
         //only call this logic if the enemy rams the player.
         if (other.CompareTag("Player"))
         {

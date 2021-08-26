@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0efe0b9301741938a5038496c85ff5, type: 3}
   m_Name: Wave1_13 FinalBoss
   m_EditorClassIdentifier: 
-  prefabName: EnemyShip
-  numberOfPrefabsToCreate: 1
-  spawnPoints:
-  - {x: 15.6, y: -0.00000010621884, z: 0}
-  - {x: 17.3, y: 2.3, z: 0}
-  - {x: 17.3, y: -2.3, z: 0}
+  prefabName: Wave13_FinalBoss
+  spawnRate: 1
+  numberOfPrefabsToCreate: 0
+  spawnPoint: {x: 0, y: 0, z: 0}
