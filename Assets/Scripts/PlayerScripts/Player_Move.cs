@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player_Move : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    
+    private Animator _anim;
     private PlayerState _currentPlayerState;
 
     public enum PlayerState
@@ -22,7 +22,8 @@ public class Player_Move : MonoBehaviour
     void Start()
     {
         _currentPlayerState = PlayerState.Idle;
-       
+        _anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -59,8 +60,9 @@ public class Player_Move : MonoBehaviour
 
     private void HandleMovement()
     {
-        var horizontal = Input.GetAxis("Horizontal");
-        var vertical = Input.GetAxis("Vertical");
+        var horizontal = Input.GetAxisRaw("Horizontal");
+        var vertical = Input.GetAxisRaw("Vertical");
+        _anim.SetFloat("VerticalInput", vertical);
         var movVector = new Vector3(horizontal, 0, -vertical);
         
         transform.Translate(movVector * (_speed * Time.deltaTime));

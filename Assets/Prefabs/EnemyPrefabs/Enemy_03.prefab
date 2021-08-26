@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e8f7776048c4bb0b2eca92ca346d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0
   _health: 10
 --- !u!95 &4915586984867349375
 Animator:
@@ -130,8 +129,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.1272907, y: 3.256053, z: 10.267446}
-  m_Center: {x: 0.43823457, y: -0.00000070841185, z: -0.2915415}
+  m_Size: {x: 6.1272907, y: 3.256053, z: 10.97083}
+  m_Center: {x: 0.4382344, y: -0.0000006953875, z: 0.060151022}
 --- !u!320 &3715718919269842577
 PlayableDirector:
   m_ObjectHideFlags: 0

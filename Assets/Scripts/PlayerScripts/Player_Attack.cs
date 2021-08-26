@@ -16,7 +16,7 @@ public class Player_Attack : MonoBehaviour, IUpgradeable
     // Start is called before the first frame update
     void Start()
     {
-        PowerLevel = 0;
+        PowerLevel = 1;
         _weaponFireRate = weapons[PowerLevel]._fireRate;
     }
 
@@ -27,7 +27,7 @@ public class Player_Attack : MonoBehaviour, IUpgradeable
         if (Input.GetButton("Fire1") && Time.time > _nextTimeWeaponCanFire)
         {
             _nextTimeWeaponCanFire = Time.time + _weaponFireRate;
-            Instantiate(weapons[PowerLevel], projectileStartPos.transform.position, weapons[PowerLevel].transform.rotation);
+            Instantiate(weapons[PowerLevel], projectileStartPos.transform.position, transform.localRotation );
         }
     }
     
