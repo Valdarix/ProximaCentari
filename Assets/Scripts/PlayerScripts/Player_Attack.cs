@@ -7,6 +7,7 @@ public class Player_Attack : MonoBehaviour, IUpgradeable
     [SerializeField] private GameObject projectileStartPos;
 
     [SerializeField] private Weapon[] weapons;
+
     public int PowerLevel { get; set; }
 
     private float _weaponFireRate;

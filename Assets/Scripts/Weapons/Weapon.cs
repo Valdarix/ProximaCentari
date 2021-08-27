@@ -8,7 +8,14 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private int _damageAmount;
     public float _fireRate = 1f;
-    
+    [SerializeField] private AudioClip _SFX;
+
+
+    private void Start()
+    {
+        AudioManager.Instance._audioSource.PlayOneShot(_SFX);
+    }
+
     // Update is called once per frame
     void Update()
     {

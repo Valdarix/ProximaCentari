@@ -9,11 +9,18 @@ public class EnemyAI : MonoBehaviour, IDamagable
     private const int CrashDamageValue = 9999;
     public int Health { get; set; }
     [SerializeField] private int _health = 10;
+    [SerializeField] private Material _dissolveShader;
+    private Renderer _renderer;
+
+    [SerializeField] private AudioClip _shieldDownSFX;
+    private bool _shieldUp = true;
+    
 
     private void Start()
     {
         Health = _health;
         _collider = GetComponent<Collider>();
+        _renderer = GetComponent<Renderer>();
     }
 
     private void Update()
@@ -34,9 +41,19 @@ public class EnemyAI : MonoBehaviour, IDamagable
     public void Damage(int damageAmount)
     {
         Health -= damageAmount;
+
+        if (Health <= Health / 2 && _shieldUp)
+        {
+            AudioManager.Instance._ambientSource.PlayOneShot(_shieldDownSFX);
+            _shieldUp = false;
+        }
+        
         if (Health <= 0)
         {
-            Destroy(gameObject);
+            _renderer.material = _dissolveShader;
+            var dissolve = GetComponent<U10PS_DissolveOverTime>();
+            dissolve.enabled = true;
+            Destroy(gameObject, 1f);
         }
     }
 

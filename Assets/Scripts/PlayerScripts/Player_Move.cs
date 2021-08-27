@@ -9,6 +9,7 @@ public class Player_Move : MonoBehaviour
     private Animator _anim;
     private PlayerState _currentPlayerState;
     [SerializeField] private GameObject _thruster;
+    [SerializeField] private GameObject _breakParticles;
 
     public enum PlayerState
     {
@@ -64,11 +65,13 @@ public class Player_Move : MonoBehaviour
         var horizontal = Input.GetAxisRaw("Horizontal");
 
         var vertical = Input.GetAxisRaw("Vertical");
-        _thruster.SetActive(horizontal > 0 || vertical != 0);
-       // _anim.SetFloat("VerticalInput", vertical);
-        var movVector = new Vector3(horizontal, 0, -vertical);
+        Debug.Log(vertical);
+        _thruster.SetActive(horizontal > 0 || (vertical != 0 && horizontal !<= 0));
+        _breakParticles.SetActive(horizontal <= 0 && vertical == 0);
+       _anim.SetFloat("VerticalInput", vertical);
+        var moveVector = new Vector3(horizontal, vertical, 0);
         
-        transform.Translate(movVector * (_speed * Time.deltaTime));
+        transform.Translate(moveVector * (_speed * Time.deltaTime), Space.World);
         
         var position = transform.position;
         var yClamp = Mathf.Clamp(position.y, -7f, 7f);
