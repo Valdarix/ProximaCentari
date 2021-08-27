@@ -8,6 +8,7 @@ public class Player_Move : MonoBehaviour
     [SerializeField] private float _speed;
     private Animator _anim;
     private PlayerState _currentPlayerState;
+    [SerializeField] private GameObject _thruster;
 
     public enum PlayerState
     {
@@ -61,8 +62,10 @@ public class Player_Move : MonoBehaviour
     private void HandleMovement()
     {
         var horizontal = Input.GetAxisRaw("Horizontal");
+
         var vertical = Input.GetAxisRaw("Vertical");
-        _anim.SetFloat("VerticalInput", vertical);
+        _thruster.SetActive(horizontal > 0 || vertical != 0);
+       // _anim.SetFloat("VerticalInput", vertical);
         var movVector = new Vector3(horizontal, 0, -vertical);
         
         transform.Translate(movVector * (_speed * Time.deltaTime));
