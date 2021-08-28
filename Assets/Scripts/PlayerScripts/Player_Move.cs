@@ -65,7 +65,6 @@ public class Player_Move : MonoBehaviour
         var horizontal = Input.GetAxisRaw("Horizontal");
 
         var vertical = Input.GetAxisRaw("Vertical");
-        Debug.Log(vertical);
         _thruster.SetActive(horizontal > 0 || (vertical != 0 && horizontal !<= 0));
         _breakParticles.SetActive(horizontal <= 0 && vertical == 0);
        _anim.SetFloat("VerticalInput", vertical);

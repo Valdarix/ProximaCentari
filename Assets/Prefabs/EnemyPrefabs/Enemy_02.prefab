@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -4192957842472776495}
   m_Layer: 0
   m_Name: Enemy_02
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 10
   _dissolveShader: {fileID: 2100000, guid: 2ba0956f552c44ea199aea622074a355, type: 2}
+  _shieldDownSFX: {fileID: 8300000, guid: 2ba5468c0851f7b4f917d07550c82ccd, type: 3}
+  _shield: {fileID: 3062408331930472809}
 --- !u!95 &1596618952035518312
 Animator:
   serializedVersion: 3
@@ -129,7 +131,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1597944237657351198}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 6.1272907, y: 3.256053, z: 6.3788133}
@@ -177,7 +179,7 @@ GameObject:
   - component: {fileID: 4223501701038247372}
   m_Layer: 0
   m_Name: ShieldContainer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,7 +212,7 @@ GameObject:
   - component: {fileID: 292903849583906712}
   m_Layer: 0
   m_Name: Enemy_Shield
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

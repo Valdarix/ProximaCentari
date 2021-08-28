@@ -24,7 +24,6 @@ public class Player_Attack : MonoBehaviour, IUpgradeable
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(_weaponFireRate + "     " + _nextTimeWeaponCanFire);
         if (Input.GetButton("Fire1") && Time.time > _nextTimeWeaponCanFire)
         {
             _nextTimeWeaponCanFire = Time.time + _weaponFireRate;

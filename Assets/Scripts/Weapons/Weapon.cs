@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -24,7 +25,9 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+      
         var hitTarget = other.GetComponent<IDamagable>();
+     
         hitTarget?.Damage(_damageAmount);
         Destroy(gameObject);
     }
