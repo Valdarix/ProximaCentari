@@ -101,9 +101,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 10
+  _pointValue: 50
   _dissolveShader: {fileID: 2100000, guid: 2ba0956f552c44ea199aea622074a355, type: 2}
   _shieldDownSFX: {fileID: 8300000, guid: 2ba5468c0851f7b4f917d07550c82ccd, type: 3}
+  _dissolveSFX: {fileID: 8300000, guid: af44cd5766c960b4aa60f9c1a991f439, type: 3}
+  _shieldHit: {fileID: 8300000, guid: 03f990ece91157e45aa7b30a14ccf113, type: 3}
   _shield: {fileID: 3062408331930472809}
+  _crashDamageValue: 1
 --- !u!95 &1596618952035518312
 Animator:
   serializedVersion: 3

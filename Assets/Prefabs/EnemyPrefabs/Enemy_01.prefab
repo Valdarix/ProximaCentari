@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3683854722597617975}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 28.95, y: 0.09, z: 0.15}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_Children: []
   m_Father: {fileID: 67840863732621600}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 360}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1019853241423338964
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -214,9 +214,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 10
+  _pointValue: 100
   _dissolveShader: {fileID: 2100000, guid: 2ba0956f552c44ea199aea622074a355, type: 2}
   _shieldDownSFX: {fileID: 8300000, guid: 2ba5468c0851f7b4f917d07550c82ccd, type: 3}
+  _dissolveSFX: {fileID: 8300000, guid: af44cd5766c960b4aa60f9c1a991f439, type: 3}
+  _shieldHit: {fileID: 8300000, guid: 03f990ece91157e45aa7b30a14ccf113, type: 3}
   _shield: {fileID: 5465869019213099354}
+  _crashDamageValue: 1
 --- !u!320 &7353160566469083104
 PlayableDirector:
   m_ObjectHideFlags: 0

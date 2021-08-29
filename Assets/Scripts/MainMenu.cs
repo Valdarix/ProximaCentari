@@ -24,10 +24,7 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void MenuButtonSFXPlay()
-    {
-        AudioManager.Instance._audioSource.PlayOneShot(_buttonSFX);
-    }
+    public void MenuButtonSFXPlay() => AudioManager.Instance._audioSource.PlayOneShot(_buttonSFX);
 
     public void DifficultySelectionEnable()
     {
@@ -37,7 +34,7 @@ public class MainMenu : MonoBehaviour
     public void SetDifficultyLevel(int difficulty)
     {
         var selectedDifficulty = difficulty switch
-        {
+        { //TODO: Match these to the GameManager when you add the other difficulties. 
             0 => GameManager.GameDifficulty.Easy,
             1 => GameManager.GameDifficulty.Normal,
             2 => GameManager.GameDifficulty.Hard,

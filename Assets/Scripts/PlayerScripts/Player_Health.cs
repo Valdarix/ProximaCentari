@@ -11,14 +11,17 @@ public class Player_Health : MonoBehaviour, IDamagable, IUpgradeable
 
     private void Start()
     {
-        PowerLevel = 0;
+        PowerLevel = 1;
         Health = PowerLevel;
+        UIManager.Instance.UpdatePlasmaLevel(Health.ToString());
+        UIManager.Instance.UpdateLifeforce(Health.ToString());
     }
 
     public void Damage(int damageAmount)
     {
         Health -= damageAmount;
-        if (Health < 0)
+        UpdatePowerLevel(damageAmount);
+        if (Health < 1)
         {
             Destroy(gameObject);
         }
@@ -27,10 +30,8 @@ public class Player_Health : MonoBehaviour, IDamagable, IUpgradeable
     public void UpdatePowerLevel(int powerChange)
     {
         PowerLevel += powerChange;
-        
-        if (powerChange < 0)
-        {
-            Damage(powerChange);
-        }
+        Health = PowerLevel;
+        UIManager.Instance.UpdatePlasmaLevel(Health.ToString());
+        UIManager.Instance.UpdateLifeforce(Health.ToString());
     }
 }

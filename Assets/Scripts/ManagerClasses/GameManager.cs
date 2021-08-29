@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -20,28 +21,40 @@ public class GameManager : MonoBehaviour
 
     public enum GameDifficulty
     {
-        Easy,
+        InsaneMode, //Unused
+        UltraHard, //Unused
+        Hard, 
         Normal,
-        Hard
+        Easy,
+        VeryEasy //Unused
     }
 
     private GameDifficulty _currentDifficulty;
+    public int EnemiesActiveInCurrentWave { get; set; }
 
     private void Awake()
     {
         _instance = this;
         DontDestroyOnLoad(this);
     }
-    
-    public void StartMusic()
+
+    private void Start() => SetDifficulty(GameDifficulty.Normal);
+
+    public void StartMusic() => AudioManager.Instance.PlayClip(0);
+
+    public void SetDifficulty(GameDifficulty selectedDifficulty) => _currentDifficulty = selectedDifficulty;
+
+    public GameDifficulty GetCurrentDifficulty() => _currentDifficulty;
+
+    private int score;
+
+    public void UpdateScore(int scoreChange)
     {
-        AudioManager.Instance.PlayClip(0);
-    }
-    
-    public void SetDifficulty(GameDifficulty selectedDifficulty)
-    {
-        _currentDifficulty = selectedDifficulty;
+        score += scoreChange;
+        UIManager.Instance.UpdateScore(score.ToString());
     }
 
-   
+ 
+
+
 }

@@ -213,11 +213,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e8f7776048c4bb0b2eca92ca346d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 15
+  _health: 100
+  _pointValue: 0
   _dissolveShader: {fileID: 2100000, guid: 2ba0956f552c44ea199aea622074a355, type: 2}
   _shieldDownSFX: {fileID: 8300000, guid: 0f425df94b2644aedb4f34d54390869d, type: 3}
   _dissolveSFX: {fileID: 8300000, guid: af44cd5766c960b4aa60f9c1a991f439, type: 3}
+  _shieldHit: {fileID: 8300000, guid: 03f990ece91157e45aa7b30a14ccf113, type: 3}
   _shield: {fileID: 616559757514461411}
+  _crashDamageValue: 1
 --- !u!95 &5381561364484490296
 Animator:
   serializedVersion: 3
@@ -226,9 +229,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5380244815874729806}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4ce1428a7d4517241a1c69df005aaff6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -260,7 +263,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 9199b24c0738f7646a87ebb384434989, type: 2}
-  m_InitialState: 0
+  m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
