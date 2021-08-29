@@ -14,7 +14,7 @@ public class Player_Health : MonoBehaviour, IDamagable, IUpgradeable
         PowerLevel = 1;
         Health = PowerLevel;
         UIManager.Instance.UpdatePlasmaLevel(Health.ToString());
-        UIManager.Instance.UpdateLifeforce(Health.ToString());
+        UIManager.Instance.UpdateLifeforce(Health);
     }
 
     public void Damage(int damageAmount)
@@ -32,6 +32,6 @@ public class Player_Health : MonoBehaviour, IDamagable, IUpgradeable
         PowerLevel += powerChange;
         Health = PowerLevel;
         UIManager.Instance.UpdatePlasmaLevel(Health.ToString());
-        UIManager.Instance.UpdateLifeforce(Health.ToString());
+        UIManager.Instance.UpdateLifeforce(Health);
     }
 }

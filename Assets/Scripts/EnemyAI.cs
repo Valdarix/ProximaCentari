@@ -26,12 +26,20 @@ public class EnemyAI : MonoBehaviour, IDamagable
  
     private static readonly int ShieldActive = Animator.StringToHash("ShieldActive");
 
+    private enum EnemyState
+    {
+        Living,
+        Dead
+    }
+
+    private EnemyState _currentEnemyState;
     private void Start()
     {
         Health = _health;
         _collider = GetComponent<Collider>();
         _renderer = GetComponent<Renderer>();
         _anim = GetComponent<Animator>();
+        _currentEnemyState = EnemyState.Living;
     }
 
     private void Update() => transform.Translate(Vector3.forward * (_speed * Time.deltaTime)); // not really needed? 
@@ -47,7 +55,7 @@ public class EnemyAI : MonoBehaviour, IDamagable
     public void Damage(int damageAmount)
     {
         Health -= damageAmount;
-        _shieldUp = (Health >= _health/2);
+        _shieldUp = (Health > _health/2);
        
         if (!_shieldUp && _shield.activeInHierarchy)
         {
@@ -61,20 +69,21 @@ public class EnemyAI : MonoBehaviour, IDamagable
             _anim.SetBool(ShieldActive,true);
         }
         
-        if (Health <= 0)
-        {
-            _collider.gameObject.SetActive(false);
+        if (Health <= 0 && _currentEnemyState == EnemyState.Living)
+        { 
             _renderer.material = _dissolveShader;
             var dissolve = GetComponent<U10PS_DissolveOverTime>();
             dissolve.enabled = true;
             AudioManager.Instance._ambientSource.PlayOneShot(_dissolveSFX);
             GameManager.Instance.UpdateScore(_pointValue);
             GameManager.Instance.EnemiesActiveInCurrentWave--;
+            _currentEnemyState = EnemyState.Dead;
+          
             Destroy(gameObject, 1f);
         }
     }
     
-    public void ResetShieldBool()
+    public void ResetShieldBool() //called by the animation event
     {
         _anim.SetBool(ShieldActive,false);
     }

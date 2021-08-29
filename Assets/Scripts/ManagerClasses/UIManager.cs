@@ -30,10 +30,19 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private AudioClip _countDownSFX;
     [SerializeField] private AudioClip _countDownDoneSFX;
+    [SerializeField] private Image[] _healthImages;
     
     public void UpdateScore(string score) => _scoreValue.text = score;
 
-    public void UpdateLifeforce(string life) => _lifeforce.text = life;
+    public void UpdateLifeforce(int life)
+    {
+        var currentHealth = 0;
+        foreach (var health in _healthImages)
+        { 
+            health.gameObject.SetActive(currentHealth < life);
+            currentHealth++;
+        }
+    }
 
     public void UpdatePlasmaLevel(string plasma) => _plasmaLevel.text = plasma;
 
@@ -42,15 +51,14 @@ public class UIManager : MonoBehaviour
     public void Start()
     {
         Instance.UpdateScore("0");
-        Instance.UpdateLifeforce("1");
+        Instance.UpdateLifeforce(1);
         Instance.UpdatePlasmaLevel("1");
     }
 
     public void NextWave() => StartCoroutine(StartWaveTimer((int)GameManager.Instance.GetCurrentDifficulty()));
 
-    public IEnumerator StartWaveTimer(int secondsToWait)
+    private IEnumerator StartWaveTimer(int secondsToWait)
     {
-       
         _noticePanel.SetActive(true);
         const int iterator = 0;
        

@@ -8,9 +8,7 @@ public class Spawner : MonoBehaviour
     public GameObject[] entityToSpawn;
 
     // An instance of the ScriptableObject defined above.
-    public ScriptableSpawnWave[] spawnManagerValues; 
-   private int _enemiesActiveInWave;
- 
+    public ScriptableSpawnWave[] spawnManagerValues;
     private void Start() => StartCoroutine(SpawnEntities());
 
     private IEnumerator SpawnEntities()
@@ -19,11 +17,11 @@ public class Spawner : MonoBehaviour
         var isPaused = GameManager.Instance.EnemiesActiveInCurrentWave > 0;
         foreach (var wave in spawnManagerValues)
         {
-            var enemiesInCurrentWave = 0;
-            GameManager.Instance.EnemiesActiveInCurrentWave = enemiesInCurrentWave;
-            
             while (!isPaused)
             {
+                var enemiesInCurrentWave = 0;
+                GameManager.Instance.EnemiesActiveInCurrentWave = enemiesInCurrentWave;
+
                 UIManager.Instance.NextWave();
                 yield return new WaitForSeconds((int)(GameManager.Instance.GetCurrentDifficulty()));
                
@@ -38,9 +36,8 @@ public class Spawner : MonoBehaviour
               
                     currentEntity.name = wave.prefabName + i;
                     currentEntity.transform.parent = transform.parent;
-                    _enemiesActiveInWave++;
                 }
-                GameManager.Instance.EnemiesActiveInCurrentWave = _enemiesActiveInWave; 
+                GameManager.Instance.EnemiesActiveInCurrentWave = enemiesInCurrentWave; 
                 isPaused =  GameManager.Instance.EnemiesActiveInCurrentWave > 0;
                 currentWave++;
             }

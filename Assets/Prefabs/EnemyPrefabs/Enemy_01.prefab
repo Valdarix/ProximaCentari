@@ -145,7 +145,7 @@ Transform:
   m_GameObject: {fileID: 7354080467332996247}
   m_LocalRotation: {x: -0, y: 0.7071068, z: 0, w: -0.7071068}
   m_LocalPosition: {x: 21.25, y: -6.5, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 67840863732621600}
   m_Father: {fileID: 0}
@@ -216,7 +216,7 @@ MonoBehaviour:
   _health: 10
   _pointValue: 100
   _dissolveShader: {fileID: 2100000, guid: 2ba0956f552c44ea199aea622074a355, type: 2}
-  _shieldDownSFX: {fileID: 8300000, guid: 2ba5468c0851f7b4f917d07550c82ccd, type: 3}
+  _shieldDownSFX: {fileID: 8300000, guid: 0f425df94b2644aedb4f34d54390869d, type: 3}
   _dissolveSFX: {fileID: 8300000, guid: af44cd5766c960b4aa60f9c1a991f439, type: 3}
   _shieldHit: {fileID: 8300000, guid: 03f990ece91157e45aa7b30a14ccf113, type: 3}
   _shield: {fileID: 5465869019213099354}
@@ -252,7 +252,7 @@ Animator:
   m_GameObject: {fileID: 7354080467332996247}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e0d515ea782904af1b69cf665fcf731d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
