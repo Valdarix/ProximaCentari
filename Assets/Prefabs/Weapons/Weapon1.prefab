@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7734295508689866576}
   - component: {fileID: 7643017460337699487}
   - component: {fileID: 4482697830214557530}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Weapon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,8 +153,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.767559, y: 4369.864, z: 0.28239667}
-  m_Center: {x: 7.5867586, y: -1216.3524, z: -0.0015304238}
+  m_Size: {x: 6.767559, y: 4369.864, z: 9.134989}
+  m_Center: {x: 7.5867586, y: -1216.3524, z: -0.75610995}
 --- !u!95 &4482697830214557530
 Animator:
   serializedVersion: 3
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 2650634892670393403}
   - component: {fileID: 7570342779562801792}
   - component: {fileID: 7525570293035046270}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4992,7 +4992,7 @@ GameObject:
   - component: {fileID: 6244081280914536130}
   - component: {fileID: 6449967805794961090}
   - component: {fileID: 2340634801339033914}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Secondary
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d0efe0b9301741938a5038496c85ff5, type: 3}
+  m_Name: Wave1_3
+  m_EditorClassIdentifier: 
+  prefabName: Wave03_
+  spawnRate: 2.5
+  spawnPoint: {x: 0, y: 0, z: 0}
+  entityToSpawn:
+  - {fileID: 4914256202583793673, guid: 69fa2a293077d4227bdc527f8e1b4532, type: 3}
+  - {fileID: 4914256202583793673, guid: 69fa2a293077d4227bdc527f8e1b4532, type: 3}
+  - {fileID: 4914256202583793673, guid: 69fa2a293077d4227bdc527f8e1b4532, type: 3}
+  - {fileID: 4914256202583793673, guid: 69fa2a293077d4227bdc527f8e1b4532, type: 3}
+  - {fileID: 4060186126454055166, guid: aa1a0dc9f3e699d4eae6f75fb12f352c, type: 3}

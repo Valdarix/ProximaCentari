@@ -3,15 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Move : MonoBehaviour
+public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
 {
     [SerializeField] private float _speed;
     private Animator _anim;
     private PlayerState _currentPlayerState;
+    public int Health { get; set; }
     [SerializeField] private GameObject _thruster;
     [SerializeField] private GameObject _breakParticles;
+    [SerializeField] private AudioClip _sfxDeath;
+    
+    [SerializeField] private GameObject projectileStartPos;
 
-    public enum PlayerState
+    [SerializeField] private Weapon[] weapons;
+
+    private int PowerLevel { get; set; }
+
+    private float _weaponFireRate;
+
+    private float _nextTimeWeaponCanFire;
+
+
+    private enum PlayerState
     {
         Idle,
         Horizontal,
@@ -21,21 +34,37 @@ public class Player_Move : MonoBehaviour
     }
   
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _currentPlayerState = PlayerState.Idle;
+        
         _anim = GetComponent<Animator>();
-
+        
+        Health = 0;
+        UIManager.Instance.UpdateLifeforce(Health);
+       
+        UpdatePlasmaLevel(0);
+       
+        _weaponFireRate = weapons[PowerLevel]._fireRate;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         HandleMovement();
         HandleStateChange();
     }
+    
+    private void FixedUpdate()
+    {
+        if (Input.GetButton("Fire1") && Time.time > _nextTimeWeaponCanFire)
+        {
+            _nextTimeWeaponCanFire = Time.time + _weaponFireRate;
+            Instantiate(weapons[PowerLevel], projectileStartPos.transform.position, transform.localRotation );
+        }
+    }
 
-    public void UpdatePlayerState(PlayerState newState)
+    private void UpdatePlayerState(PlayerState newState)
     {
         _currentPlayerState = newState;
     }
@@ -53,6 +82,7 @@ public class Player_Move : MonoBehaviour
             case PlayerState.PowerChange:
                 break;
             case PlayerState.Death:
+                _anim.SetTrigger("Die");
                 break;
             default:
                 Debug.LogError("Player has no state");
@@ -79,4 +109,42 @@ public class Player_Move : MonoBehaviour
         position = new Vector3(xClamp, yClamp, 0);
         transform.position = position;
     }
+    
+    public void Damage(int damageAmount)
+    {
+        PowerLevel -= damageAmount;
+        Debug.Log(PowerLevel);
+        Health = PowerLevel;
+        Debug.Log(Health);
+        UIManager.Instance.UpdateLifeforce(Health);
+
+        if (Health < 0)
+        {
+            GetComponent<Player_Move>().UpdatePlayerState(Player_Move.PlayerState.Death);
+            GetComponent<AudioSource>().PlayOneShot(_sfxDeath);
+            Destroy(gameObject, 2f);
+        }
+        UpdatePlasmaLevel(damageAmount);
+    }
+
+    public void UpdatePlasmaLevel(int powerChange)
+    {
+        PowerLevel += powerChange;
+        UIManager.Instance.UpdateLifeforce(PowerLevel);
+            
+        var plasmaGaugeValue = PowerLevel switch
+        {
+            0 => 0.2f,
+            1 => 0.4f,
+            2 => 0.6f,
+            3 => 0.8f,
+            4 => 1f,
+            _ => 0f
+        };
+        UIManager.Instance.UpdatePlasmaLevel(plasmaGaugeValue);
+        
+        if (PowerLevel !<0 && PowerLevel !>4)
+            _weaponFireRate = weapons[PowerLevel]._fireRate;
+    }
+
 }

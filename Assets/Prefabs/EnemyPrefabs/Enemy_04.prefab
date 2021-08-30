@@ -126,9 +126,9 @@ GameObject:
   - component: {fileID: 5402948696923898108}
   - component: {fileID: 4004691157442289132}
   - component: {fileID: 5381561364484490296}
-  - component: {fileID: 5043235270645989058}
   - component: {fileID: 4397883192168364502}
   - component: {fileID: -3231634814957412723}
+  - component: {fileID: -6390423057901846519}
   m_Layer: 0
   m_Name: Enemy_04
   m_TagString: Untagged
@@ -219,8 +219,10 @@ MonoBehaviour:
   _shieldDownSFX: {fileID: 8300000, guid: 0f425df94b2644aedb4f34d54390869d, type: 3}
   _dissolveSFX: {fileID: 8300000, guid: af44cd5766c960b4aa60f9c1a991f439, type: 3}
   _shieldHit: {fileID: 8300000, guid: 03f990ece91157e45aa7b30a14ccf113, type: 3}
-  _shield: {fileID: 616559757514461411}
   _crashDamageValue: 1
+  _shield: {fileID: 616559757514461411}
+  _dropPowerUp: 0
+  _powerUpObj: {fileID: 0}
 --- !u!95 &5381561364484490296
 Animator:
   serializedVersion: 3
@@ -240,19 +242,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &5043235270645989058
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5380244815874729806}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.293942, y: 3.256053, z: 10.751199}
-  m_Center: {x: 0.021559794, y: -0.0000006953875, z: -0.049664177}
 --- !u!320 &4397883192168364502
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -287,3 +276,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.4
+--- !u!64 &-6390423057901846519
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5380244815874729806}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -417026853255517257, guid: a9e1d66c337394b498df4fa2bc76d8d0, type: 3}

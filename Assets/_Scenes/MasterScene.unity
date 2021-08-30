@@ -1374,22 +1374,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 429948719211964000, guid: 367b48fc1cd954dc68974b796d454fa2, type: 3}
-      propertyPath: music.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 429948719211964000, guid: 367b48fc1cd954dc68974b796d454fa2, type: 3}
-      propertyPath: music.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: fcee296bb04eb0843bb8e280d95ca6c3, type: 3}
-    - target: {fileID: 429948719211964000, guid: 367b48fc1cd954dc68974b796d454fa2, type: 3}
-      propertyPath: music.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: b2302dce5e92b4ba986e69531004d847, type: 3}
-    - target: {fileID: 429948719211964000, guid: 367b48fc1cd954dc68974b796d454fa2, type: 3}
-      propertyPath: music.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 74f3f867bb70341d1b29453f0e3d8571, type: 3}
     - target: {fileID: 429948719211964001, guid: 367b48fc1cd954dc68974b796d454fa2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1434,18 +1418,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 429948719211964003, guid: 367b48fc1cd954dc68974b796d454fa2, type: 3}
-      propertyPath: m_Volume
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 429948719211964006, guid: 367b48fc1cd954dc68974b796d454fa2, type: 3}
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 429948721166140155, guid: 367b48fc1cd954dc68974b796d454fa2, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 69244f1dfaa30634ab24a12854273744, type: 3}
+      propertyPath: Priority
+      value: 167
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201629398263558364, guid: 367b48fc1cd954dc68974b796d454fa2, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201629398263558364, guid: 367b48fc1cd954dc68974b796d454fa2, type: 3}
+      propertyPath: Priority
+      value: 74
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201629398263558364, guid: 367b48fc1cd954dc68974b796d454fa2, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201629398263558364, guid: 367b48fc1cd954dc68974b796d454fa2, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 367b48fc1cd954dc68974b796d454fa2, type: 3}
 --- !u!1 &1685000299 stripped

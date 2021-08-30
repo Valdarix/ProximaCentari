@@ -2275,6 +2275,7 @@ MonoBehaviour:
   _ambientValue: {fileID: 722564329}
   _brigthnessValue: {fileID: 302956005}
   _brigthnessSlider: {fileID: 431194009}
+  _buttonSFX: {fileID: 8300000, guid: 4fb135d3c45ee7343ba34122f8adc35f, type: 3}
 --- !u!1 &1802747203
 GameObject:
   m_ObjectHideFlags: 0

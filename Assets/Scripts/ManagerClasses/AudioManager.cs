@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private List<AudioClip> music;
     public AudioSource _audioSource;
     public AudioSource _ambientSource;
+    public AudioSource _SFXSource;
 
     private void Awake()
     {

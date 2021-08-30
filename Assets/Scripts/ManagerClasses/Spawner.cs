@@ -5,12 +5,12 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     // The GameObject to instantiate.
-    public GameObject[] entityToSpawn;
+    
 
     // An instance of the ScriptableObject defined above.
     public ScriptableSpawnWave[] spawnManagerValues;
     private void Start() => StartCoroutine(SpawnEntities());
-
+    
     private IEnumerator SpawnEntities()
     {
         var currentWave = 0;
@@ -19,32 +19,28 @@ public class Spawner : MonoBehaviour
         {
             while (!isPaused)
             {
-                var enemiesInCurrentWave = 0;
-                GameManager.Instance.EnemiesActiveInCurrentWave = enemiesInCurrentWave;
-
                 UIManager.Instance.NextWave();
                 yield return new WaitForSeconds((int)(GameManager.Instance.GetCurrentDifficulty()));
-               
-                enemiesInCurrentWave = wave.numberOfPrefabsToCreate;
+                
+                var enemiesInCurrentWave = wave.entityToSpawn.Length;
+                GameManager.Instance.EnemiesActiveInCurrentWave = enemiesInCurrentWave;
                 for (var i = 0; i < enemiesInCurrentWave; i++)
                 {
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(wave.spawnRate);
 
-                    var enemyToSpawn = currentWave < 4 ? currentWave : Random.Range(0, entityToSpawn.Length);
-
-                    var currentEntity = Instantiate(entityToSpawn[enemyToSpawn], wave.spawnPoint, entityToSpawn[enemyToSpawn].transform.rotation);
+                    var currentEntity = Instantiate(wave.entityToSpawn[i], wave.spawnPoint, wave.entityToSpawn[i].transform.rotation);
               
                     currentEntity.name = wave.prefabName + i;
                     currentEntity.transform.parent = transform.parent;
                 }
-                GameManager.Instance.EnemiesActiveInCurrentWave = enemiesInCurrentWave; 
+                Debug.Log(GameManager.Instance.EnemiesActiveInCurrentWave);
                 isPaused =  GameManager.Instance.EnemiesActiveInCurrentWave > 0;
                 currentWave++;
             }
             while (isPaused) 
             {
-                
                 isPaused = GameManager.Instance.EnemiesActiveInCurrentWave > 0;
+                Debug.Log(GameManager.Instance.EnemiesActiveInCurrentWave);
                 yield return null;
             }
             yield return new WaitForSeconds(2.5f);

@@ -127,8 +127,8 @@ GameObject:
   - component: {fileID: 1961049889955833397}
   - component: {fileID: 7353160566469083104}
   - component: {fileID: 7353160566469083105}
-  - component: {fileID: 7591277720845092123}
   - component: {fileID: -6137804933272410145}
+  - component: {fileID: 279354298}
   m_Layer: 0
   m_Name: Enemy_01
   m_TagString: Untagged
@@ -219,8 +219,10 @@ MonoBehaviour:
   _shieldDownSFX: {fileID: 8300000, guid: 0f425df94b2644aedb4f34d54390869d, type: 3}
   _dissolveSFX: {fileID: 8300000, guid: af44cd5766c960b4aa60f9c1a991f439, type: 3}
   _shieldHit: {fileID: 8300000, guid: 03f990ece91157e45aa7b30a14ccf113, type: 3}
-  _shield: {fileID: 5465869019213099354}
   _crashDamageValue: 1
+  _shield: {fileID: 5465869019213099354}
+  _dropPowerUp: 0
+  _powerUpObj: {fileID: 0}
 --- !u!320 &7353160566469083104
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -261,19 +263,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &7591277720845092123
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7354080467332996247}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 13.638828, y: 3.256053, z: 10.267446}
-  m_Center: {x: 5.9034215e-16, y: -0.00000071525574, z: -0.29154158}
 --- !u!114 &-6137804933272410145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,3 +276,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.4
+--- !u!64 &279354298
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7354080467332996247}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1269116562925425082, guid: 9eafec2478441af418574f3e9e971f8d, type: 3}
