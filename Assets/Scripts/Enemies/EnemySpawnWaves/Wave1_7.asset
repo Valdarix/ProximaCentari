@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave1_7
   m_EditorClassIdentifier: 
   prefabName: Wave07_
-  spawnRate: 2.5
+  spawnRate: 1
   spawnPoint: {x: 0, y: 0, z: 0}
   entityToSpawn:
   - {fileID: 4914256202583793673, guid: 69fa2a293077d4227bdc527f8e1b4532, type: 3}

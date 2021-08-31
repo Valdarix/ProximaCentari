@@ -120,9 +120,9 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
 
         if (Health < 0)
         {
-            GetComponent<Player_Move>().UpdatePlayerState(Player_Move.PlayerState.Death);
+            GetComponent<Player_Move>().UpdatePlayerState(PlayerState.Death);
             GetComponent<AudioSource>().PlayOneShot(_sfxDeath);
-            Destroy(gameObject, 2f);
+            
         }
         UpdatePlasmaLevel(damageAmount);
     }
@@ -145,6 +145,11 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
         
         if (PowerLevel !<0 && PowerLevel !>4)
             _weaponFireRate = weapons[PowerLevel]._fireRate;
+    }
+
+    protected void DieNotifier()
+    {
+        UIManager.Instance.EndGameText(1);
     }
 
 }

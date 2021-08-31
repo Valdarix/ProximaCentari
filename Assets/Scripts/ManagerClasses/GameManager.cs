@@ -54,6 +54,13 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateScore(score.ToString());
     }
 
+    public void ResetGame()
+    {
+        SetDifficulty(GameDifficulty.Normal);
+        score = 0;
+        
+    }
+
  
 
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave1_13 FinalBoss
   m_EditorClassIdentifier: 
   prefabName: Wave13_FinalBoss
-  spawnRate: 5
+  spawnRate: 1
   spawnPoint: {x: 0, y: 0, z: 0}
   entityToSpawn:
   - {fileID: 5138037443494724836, guid: f4c03fd332648404e9d1f5df07eadc7e, type: 3}

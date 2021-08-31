@@ -4,12 +4,11 @@ using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
-    // The GameObject to instantiate.
-    
-
-    // An instance of the ScriptableObject defined above.
+   
     public ScriptableSpawnWave[] spawnManagerValues;
     private void Start() => StartCoroutine(SpawnEntities());
+    
+    
     
     private IEnumerator SpawnEntities()
     {
@@ -43,7 +42,7 @@ public class Spawner : MonoBehaviour
                 Debug.Log(GameManager.Instance.EnemiesActiveInCurrentWave);
                 yield return null;
             }
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(2f);
           
         }
     }
