@@ -7,9 +7,7 @@ public class Spawner : MonoBehaviour
    
     public ScriptableSpawnWave[] spawnManagerValues;
     private void Start() => StartCoroutine(SpawnEntities());
-    
-    
-    
+
     private IEnumerator SpawnEntities()
     {
         var currentWave = 0;
@@ -39,10 +37,10 @@ public class Spawner : MonoBehaviour
             while (isPaused) 
             {
                 isPaused = GameManager.Instance.EnemiesActiveInCurrentWave > 0;
-                Debug.Log(GameManager.Instance.EnemiesActiveInCurrentWave);
+             
                 yield return null;
             }
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.5f);
           
         }
     }

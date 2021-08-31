@@ -53,10 +53,7 @@ public class EnemyAI : MonoBehaviour, IDamagable
     {
        _collider.gameObject.SetActive(false);
        GameManager.Instance.EnemiesActiveInCurrentWave--;
-       if (_dropPowerUp)
-       {
-           Instantiate(_powerUpObj, new Vector3(transform.localPosition.x,transform.localPosition.y, 0), quaternion.identity);
-       }
+       
        Destroy(gameObject, 1f);
     }
 
@@ -79,6 +76,10 @@ public class EnemyAI : MonoBehaviour, IDamagable
         
         if (Health <= 0 && _currentEnemyState == EnemyState.Living)
         { 
+            if (_dropPowerUp)
+            {
+                Instantiate(_powerUpObj, new Vector3(transform.position.x,transform.position.y, 0), quaternion.identity);
+            }
             _renderer.material = _dissolveShader;
             var dissolve = GetComponent<U10PS_DissolveOverTime>();
             dissolve.enabled = true;

@@ -112,10 +112,11 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
     
     public void Damage(int damageAmount)
     {
+        
         PowerLevel -= damageAmount;
-        Debug.Log(PowerLevel);
+      
         Health = PowerLevel;
-        Debug.Log(Health);
+      
         UIManager.Instance.UpdateLifeforce(Health);
 
         if (Health < 0)
