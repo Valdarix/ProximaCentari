@@ -17,8 +17,10 @@ public class EnemyAI : MonoBehaviour, IDamagable
     [SerializeField] private GameObject _shield;
     [SerializeField] private bool _dropPowerUp;
     [SerializeField] private GameObject _powerUpObj;
+    [SerializeField] private GameObject _thruster;
     private float _speed = 0f;
     private Collider _collider;
+    public bool IsAlive { get; set; }
 
 
     public int Health { get; set; }
@@ -43,18 +45,20 @@ public class EnemyAI : MonoBehaviour, IDamagable
         _renderer = GetComponent<Renderer>();
         _anim = GetComponent<Animator>();
         _currentEnemyState = EnemyState.Living;
+        IsAlive = true;
     }
 
     private void Update() => transform.Translate(Vector3.forward * (_speed * Time.deltaTime)); // not really needed? 
 
     private void OnBecameVisible() => _collider.gameObject.SetActive(true);
 
-    protected void DestroyEnemy()
+    protected IEnumerator DestroyEnemy()
     {
+        yield return new WaitForSeconds(1f);
        _collider.gameObject.SetActive(false);
        GameManager.Instance.EnemiesActiveInCurrentWave--;
        
-       Destroy(gameObject, 1f);
+       Destroy(gameObject);
     }
 
    public void Damage(int damageAmount)
@@ -80,12 +84,17 @@ public class EnemyAI : MonoBehaviour, IDamagable
             {
                 Instantiate(_powerUpObj, new Vector3(transform.position.x,transform.position.y, 0), quaternion.identity);
             }
+
+            IsAlive = false;
             _renderer.material = _dissolveShader;
             var dissolve = GetComponent<U10PS_DissolveOverTime>();
             dissolve.enabled = true;
             AudioManager.Instance._SFXSource.PlayOneShot(_dissolveSFX);
             GameManager.Instance.UpdateScore(_pointValue);
             _currentEnemyState = EnemyState.Dead;
+            if (_thruster != null)
+                _thruster.SetActive(false);
+            StartCoroutine(DestroyEnemy());
         }
     }
     
@@ -96,9 +105,10 @@ public class EnemyAI : MonoBehaviour, IDamagable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && _currentEnemyState != EnemyState.Dead)
         {
             var hitTarget = other.GetComponent<IDamagable>();
+            if (hitTarget?.IsAlive != true) return;
             hitTarget?.Damage(_crashDamageValue); 
             GameManager.Instance.EnemiesActiveInCurrentWave--;
             Destroy(gameObject,0.1f);

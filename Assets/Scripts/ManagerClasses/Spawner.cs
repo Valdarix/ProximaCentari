@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
                     currentEntity.name = wave.prefabName + i;
                     currentEntity.transform.parent = transform.parent;
                 }
-                Debug.Log(GameManager.Instance.EnemiesActiveInCurrentWave);
+           
                 isPaused =  GameManager.Instance.EnemiesActiveInCurrentWave > 0;
                 currentWave++;
             }
@@ -40,7 +40,7 @@ public class Spawner : MonoBehaviour
              
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(2.5f);
           
         }
     }

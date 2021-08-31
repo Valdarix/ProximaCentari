@@ -16,7 +16,7 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
     [SerializeField] private GameObject projectileStartPos;
 
     [SerializeField] private Weapon[] weapons;
-
+    public bool IsAlive { get; set; }
     private int PowerLevel { get; set; }
 
     private float _weaponFireRate;
@@ -53,21 +53,19 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
     {
         HandleMovement();
         HandleStateChange();
+        IsAlive = _currentPlayerState != PlayerState.Death;
     }
     
     private void FixedUpdate()
     {
-        if (Input.GetButton("Fire1") && Time.time > _nextTimeWeaponCanFire)
+        if (Input.GetButton("Fire1") && Time.time > _nextTimeWeaponCanFire && PowerLevel >= 0)
         {
             _nextTimeWeaponCanFire = Time.time + _weaponFireRate;
             Instantiate(weapons[PowerLevel], projectileStartPos.transform.position, transform.localRotation );
         }
     }
 
-    private void UpdatePlayerState(PlayerState newState)
-    {
-        _currentPlayerState = newState;
-    }
+    private void UpdatePlayerState(PlayerState newState) => _currentPlayerState = newState;
 
     private void HandleStateChange()
     {
@@ -114,25 +112,34 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
     {
         
         PowerLevel -= damageAmount;
-      
         Health = PowerLevel;
-      
         UIManager.Instance.UpdateLifeforce(Health);
-
+        var plasmaGaugeValue = PowerLevel switch
+        {
+            0 => 0.2f,
+            1 => 0.4f,
+            2 => 0.6f,
+            3 => 0.8f,
+            4 => 1f,
+            _ => 0f
+        };
+        UIManager.Instance.UpdatePlasmaLevel(plasmaGaugeValue);
+      
         if (Health < 0)
         {
             GetComponent<Player_Move>().UpdatePlayerState(PlayerState.Death);
             GetComponent<AudioSource>().PlayOneShot(_sfxDeath);
             
         }
-        UpdatePlasmaLevel(damageAmount);
+        
     }
 
     public void UpdatePlasmaLevel(int powerChange)
     {
         PowerLevel += powerChange;
-        UIManager.Instance.UpdateLifeforce(PowerLevel);
-            
+        Health = PowerLevel;
+        UIManager.Instance.UpdateLifeforce(Health);
+        
         var plasmaGaugeValue = PowerLevel switch
         {
             0 => 0.2f,
@@ -149,8 +156,10 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
     }
 
     protected void DieNotifier()
-    {
+    {   
+        Destroy(gameObject);
         UIManager.Instance.EndGameText(1);
+        
     }
 
 }

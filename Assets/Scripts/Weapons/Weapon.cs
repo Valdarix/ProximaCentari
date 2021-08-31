@@ -27,9 +27,12 @@ public class Weapon : MonoBehaviour
     {
       
         var hitTarget = other.GetComponent<IDamagable>();
-     
-        hitTarget?.Damage(_damageAmount);
-        Destroy(gameObject);
+        if (hitTarget?.IsAlive == true)
+        {
+            hitTarget?.Damage(_damageAmount);
+            Destroy(gameObject);
+        }
+      
     }
 
     private void OnBecameInvisible()
