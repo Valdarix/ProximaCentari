@@ -102,7 +102,7 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
         
         var position = transform.position;
         var yClamp = Mathf.Clamp(position.y, -7f, 7f);
-        var xClamp = Mathf.Clamp(position.x, -11.5f, 11.5f);
+        var xClamp = Mathf.Clamp(position.x, -13f, 13f);
         
         position = new Vector3(xClamp, yClamp, 0);
         transform.position = position;
@@ -110,7 +110,6 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
     
     public void Damage(int damageAmount)
     {
-        
         PowerLevel -= damageAmount;
         Health = PowerLevel;
         UIManager.Instance.UpdateLifeforce(Health);

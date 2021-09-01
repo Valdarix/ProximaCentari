@@ -149,6 +149,7 @@ Transform:
   m_Children:
   - {fileID: 8656008726625406039}
   - {fileID: 4731860220574122}
+  - {fileID: 8905788185819473663}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -226,6 +227,7 @@ MonoBehaviour:
   _powerUpObj: {fileID: 8874069571292095090, guid: d916695b6d2a32f4a986753dcb203103, type: 3}
   _thruster: {fileID: 1223524822536968}
   _misslePrefab: {fileID: 6744219904724392295, guid: 2bb726cacbf964df48775edf33c662d7, type: 3}
+  _missileLaunchPos: {fileID: 7741244776704535418}
 --- !u!95 &7505455432732012091
 Animator:
   serializedVersion: 3
@@ -293,6 +295,36 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -417026853255517257, guid: a9e1d66c337394b498df4fa2bc76d8d0, type: 3}
+--- !u!1 &7741244776704535418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8905788185819473663}
+  m_Layer: 0
+  m_Name: MisslePos (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8905788185819473663
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7741244776704535418}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
+  m_LocalPosition: {x: 0, y: -0.84, z: 5.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7505102916969961333}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1865625090
 PrefabInstance:
   m_ObjectHideFlags: 0

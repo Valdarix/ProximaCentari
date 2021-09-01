@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6767717320921092249}
   - component: {fileID: 6759732144838922113}
   - component: {fileID: 1756758596}
+  - component: {fileID: 7529647689500513888}
   m_Layer: 0
   m_Name: EnemyMissle
   m_TagString: Untagged
@@ -100,7 +101,21 @@ MonoBehaviour:
   speed: 35
   _damageAmount: 1
   _fireRate: 1
-  _SFX: {fileID: 0}
+  _SFX: {fileID: 8300000, guid: 281e15cc92254794eaf05caf4d044b76, type: 3}
+--- !u!64 &7529647689500513888
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6744219904724392295}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300002, guid: afbbf42a35d3ca347aea29a1457035cc, type: 3}
 --- !u!1 &6744771408024693475
 GameObject:
   m_ObjectHideFlags: 0

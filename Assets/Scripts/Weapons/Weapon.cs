@@ -24,7 +24,6 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-      
         var hitTarget = other.GetComponent<IDamagable>();
         if (hitTarget?.IsAlive == true)
         {

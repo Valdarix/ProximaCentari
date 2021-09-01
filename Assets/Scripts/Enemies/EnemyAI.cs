@@ -19,6 +19,7 @@ public class EnemyAI : MonoBehaviour, IDamagable
     [SerializeField] private GameObject _powerUpObj;
     [SerializeField] private GameObject _thruster;
     [SerializeField] private GameObject _misslePrefab;
+    [SerializeField] private GameObject _missileLaunchPos;
     private float _speed = 0f;
     private Collider _collider;
     public bool IsAlive { get; set; }
@@ -52,8 +53,9 @@ public class EnemyAI : MonoBehaviour, IDamagable
 
     public void FireWeapon()
     {
-        var pos = transform.position;
-        Instantiate(_misslePrefab, new Vector3(pos.x, pos.y, 0), transform.rotation);
+        var enemyTransform = _missileLaunchPos.transform;
+        var pos = enemyTransform.position;
+        Instantiate(_misslePrefab, new Vector3(pos.x, pos.y, 0), enemyTransform.rotation);
     }
 
     private void Update() => transform.Translate(Vector3.forward * (_speed * Time.deltaTime)); // not really needed? 

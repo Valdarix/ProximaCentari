@@ -12,12 +12,21 @@ public class Spawner : MonoBehaviour
     {
         var currentWave = 0;
         var isPaused = GameManager.Instance.EnemiesActiveInCurrentWave > 0;
+        
         foreach (var wave in spawnManagerValues)
         {
             while (!isPaused)
             {
                 UIManager.Instance.NextWave();
                 yield return new WaitForSeconds((int)(GameManager.Instance.GetCurrentDifficulty()));
+                if (currentWave == 7)
+                {
+                    AudioManager.Instance.PlayClip(3);
+                }
+                if (currentWave == 12)
+                {
+                    AudioManager.Instance.PlayClip(2);
+                }
                 
                 var enemiesInCurrentWave = wave.entityToSpawn.Length;
                 GameManager.Instance.EnemiesActiveInCurrentWave = enemiesInCurrentWave;
