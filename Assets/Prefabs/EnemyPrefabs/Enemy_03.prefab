@@ -194,6 +194,7 @@ MonoBehaviour:
   _dropPowerUp: 0
   _powerUpObj: {fileID: 0}
   _thruster: {fileID: 1184800297827547450}
+  _misslePrefab: {fileID: 6744219904724392295, guid: 2bb726cacbf964df48775edf33c662d7, type: 3}
 --- !u!95 &4915586984867349375
 Animator:
   serializedVersion: 3
