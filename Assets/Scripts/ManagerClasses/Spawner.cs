@@ -10,14 +10,18 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator SpawnEntities()
     {
-        var currentWave = GameManager.Instance.GetWave();
+        var currentWave = 0;
+        GameManager.Instance.SetWave(currentWave);
+        UIManager.Instance.UpdateWaveCount(currentWave);
+       
         var isPaused = GameManager.Instance.EnemiesActiveInCurrentWave > 0;
-        
-        foreach (var wave in spawnManagerValues)
+ 
+        for (var wave = currentWave; wave < spawnManagerValues.Length; wave++)
         {
             while (!isPaused)
             {
                 UIManager.Instance.NextWave();
+                UIManager.Instance.UpdateWaveCount(currentWave);
                 yield return new WaitForSeconds((int)(GameManager.Instance.GetCurrentDifficulty()));
                 if (currentWave == 7)
                 {
@@ -28,20 +32,21 @@ public class Spawner : MonoBehaviour
                     AudioManager.Instance.PlayClip(2);
                 }
                 
-                var enemiesInCurrentWave = wave.entityToSpawn.Length;
+                var enemiesInCurrentWave = spawnManagerValues[currentWave].entityToSpawn.Length;
                 GameManager.Instance.EnemiesActiveInCurrentWave = enemiesInCurrentWave;
                 for (var i = 0; i < enemiesInCurrentWave; i++)
                 {
-                    yield return new WaitForSeconds(wave.spawnRate);
+                    yield return new WaitForSeconds(spawnManagerValues[currentWave].spawnRate);
 
-                    var currentEntity = Instantiate(wave.entityToSpawn[i], wave.spawnPoint, wave.entityToSpawn[i].transform.rotation);
+                    var currentEntity = Instantiate(spawnManagerValues[currentWave].entityToSpawn[i], spawnManagerValues[currentWave].spawnPoint, spawnManagerValues[currentWave].entityToSpawn[i].transform.rotation);
               
-                    currentEntity.name = wave.prefabName + i;
+                    currentEntity.name = spawnManagerValues[currentWave].prefabName + i;
                     currentEntity.transform.parent = transform.parent;
                 }
            
                 isPaused =  GameManager.Instance.EnemiesActiveInCurrentWave > 0;
                 currentWave++;
+                GameManager.Instance.SetWave(currentWave);
             }
             while (isPaused) 
             {

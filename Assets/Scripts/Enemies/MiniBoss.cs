@@ -77,7 +77,7 @@ public class MiniBoss : MonoBehaviour, IDamagable
         yield return new WaitForSeconds(1f);
        _collider.gameObject.SetActive(false);
        GameManager.Instance.EnemiesActiveInCurrentWave--;
-       
+       GameManager.Instance.SetCheckPoint();
        Destroy(gameObject);
     }
 
@@ -137,8 +137,7 @@ public class MiniBoss : MonoBehaviour, IDamagable
             var hitTarget = other.GetComponent<IDamagable>();
             if (hitTarget?.IsAlive != true) return;
             hitTarget?.Damage(_crashDamageValue); 
-            GameManager.Instance.EnemiesActiveInCurrentWave--;
-            Destroy(gameObject,0.1f);
+            Damage(20);
         }
     }
     

@@ -29,7 +29,7 @@ public class BossLauncher : MonoBehaviour, IDamagable
    {
       Health -= damageAmount;
       AudioManager.Instance._SFXSource.PlayOneShot(_hitSFX);
-     
+      GameManager.Instance.SetLastPhase();
       if (Health <= 0)
       {
          explosionEffect.SetActive(true);

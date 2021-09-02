@@ -64,29 +64,48 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateScore(score.ToString());
     }
 
-    private int Wave = 0;
+    private int Wave;
 
     public int GetWave()
     {
         return Wave;
+    }
+    public void SetWave(int currentWave)
+    {
+        Wave = currentWave;
     }
 
     public void ResetGame()
     {
         if (!atCcheckpoint)
         {
-            SetDifficulty(GameDifficulty.Normal);
+            SetDifficulty(_currentDifficulty);
             score = 0;
             Wave = 0;
+            Instance.EnemiesActiveInCurrentWave = 0;
+          // UIManager.Instance.NextWave();
         }
         else
         {
             Wave = 8;
+            Instance.EnemiesActiveInCurrentWave = 0;
         }
 
     }
 
- 
+    private bool lastPhase;
+
+    public void SetLastPhase()
+    {
+        lastPhase = true;
+    }
+
+    public bool GetLastPhase()
+    {
+        return lastPhase;
+    }
+
+
 
 
 }

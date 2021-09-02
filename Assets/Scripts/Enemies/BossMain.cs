@@ -47,26 +47,30 @@ public class BossMain : MonoBehaviour, IDamagable
 
     public void Damage(int damageAmount)
     {
-        Health -= damageAmount;
-        if (Health < 1000)
+        if (GameManager.Instance.GetLastPhase() == true)
         {
-            _damaged.SetActive(true);
-            lastPhase = true;
-            _animator.SetBool("LastPhase", true);
-            var boss = FindObjectOfType<Boss>();
-            boss.SetLastPhase(lastPhase);
-        }
+            Health -= damageAmount;
+            if (Health < 1000)
+            {
+                _damaged.SetActive(true);
+                lastPhase = true;
+                _animator.SetBool("LastPhase", true);
+                var boss = FindObjectOfType<Boss>();
+                boss.SetLastPhase(lastPhase);
+            }
 
-        if (Health <= 1000)
-        {
+            if (Health <= 0)
+            {
             
-            lastPhase = false;
-            _renderer.material = _dissolveShader;
-            var dissolve = GetComponent<U10PS_DissolveOverTime>();
-            dissolve.enabled = true;
-            AudioManager.Instance._SFXSource.PlayOneShot(_dissolveSFX);
-            StartCoroutine(DestroyEnemy());
+                lastPhase = false;
+                _renderer.material = _dissolveShader;
+                var dissolve = GetComponent<U10PS_DissolveOverTime>();
+                dissolve.enabled = true;
+                AudioManager.Instance._SFXSource.PlayOneShot(_dissolveSFX);
+                StartCoroutine(DestroyEnemy());
+            }
         }
+        
     }
     
     protected IEnumerator DestroyEnemy()

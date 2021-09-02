@@ -62,7 +62,7 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
         if (Input.GetButton("Fire1") && Time.time > _nextTimeWeaponCanFire && PowerLevel >= 0 && IsAlive)
         {
             _nextTimeWeaponCanFire = Time.time + _weaponFireRate;
-            Instantiate(weapons[PowerLevel], projectileStartPos.transform.position, transform.localRotation );
+            Instantiate(weapons[PowerLevel], projectileStartPos.transform.position, weapons[PowerLevel].transform.rotation);
         }
     }
 

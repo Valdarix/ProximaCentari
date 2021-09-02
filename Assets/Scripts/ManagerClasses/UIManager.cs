@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private AudioClip _countDownDoneSFX;
     [SerializeField] private Image[] _healthImages;
     [SerializeField] private Image _plasmaPowerGauge;
+    [SerializeField] private Text _waveCount;
    
     public void UpdateScore(string score) => _scoreValue.text = score;
 
@@ -49,6 +50,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void UpdateWaveCount(int wave)
+    {
+        _waveCount.text = "CURRENT WAVE " + (wave + 1);
+    }
+    
     public void UpdatePlasmaLevel(float plasma)
     {
         _plasmaPowerGauge.fillAmount = plasma;
@@ -134,7 +140,7 @@ public class UIManager : MonoBehaviour
             case 0:
                 SceneController.Instance.LoadGameScene("GameScene");
                 GameManager.Instance.ResetGame();
-               
+                
                 Instance.UpdateScore("0");
                 Instance.UpdateLifeforce(0);
                 Instance.UpdatePlasmaLevel(0.20f);
