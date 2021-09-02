@@ -16,4 +16,4 @@ MonoBehaviour:
   spawnRate: 1
   spawnPoint: {x: 0, y: 0, z: 0}
   entityToSpawn:
-  - {fileID: 5138037443494724836, guid: f4c03fd332648404e9d1f5df07eadc7e, type: 3}
+  - {fileID: 1931112311888991675, guid: 744d8b70c3434b944b69618a210461b0, type: 3}

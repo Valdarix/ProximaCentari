@@ -29,6 +29,12 @@ public class GameManager : MonoBehaviour
         VeryEasy //Unused
     }
 
+    private bool atCcheckpoint;
+    public void SetCheckPoint()
+    {
+        atCcheckpoint = true;
+    }
+
     private GameDifficulty _currentDifficulty;
     public int EnemiesActiveInCurrentWave { get; set; }
 
@@ -38,7 +44,11 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    private void Start() => SetDifficulty(GameDifficulty.Normal);
+    private void Start()
+    {
+        atCcheckpoint = false;
+        SetDifficulty(GameDifficulty.Normal);
+    }
 
     public void StartMusic() => AudioManager.Instance.PlayClip(0);
 
@@ -54,11 +64,26 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateScore(score.ToString());
     }
 
+    private int Wave = 0;
+
+    public int GetWave()
+    {
+        return Wave;
+    }
+
     public void ResetGame()
     {
-        SetDifficulty(GameDifficulty.Normal);
-        score = 0;
-        
+        if (!atCcheckpoint)
+        {
+            SetDifficulty(GameDifficulty.Normal);
+            score = 0;
+            Wave = 0;
+        }
+        else
+        {
+            Wave = 8;
+        }
+
     }
 
  

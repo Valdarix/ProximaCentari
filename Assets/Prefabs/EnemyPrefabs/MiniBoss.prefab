@@ -1623,8 +1623,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af835d873b28a54ba14611506f56557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 50
-  _pointValue: 500
+  _health: 1500
+  _pointValue: 1000
   _dissolveShader: {fileID: 2100000, guid: 2ba0956f552c44ea199aea622074a355, type: 2}
   _shieldDownSFX: {fileID: 8300000, guid: 0f425df94b2644aedb4f34d54390869d, type: 3}
   _dissolveSFX: {fileID: 8300000, guid: af44cd5766c960b4aa60f9c1a991f439, type: 3}

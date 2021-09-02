@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator SpawnEntities()
     {
-        var currentWave = 0;
+        var currentWave = GameManager.Instance.GetWave();
         var isPaused = GameManager.Instance.EnemiesActiveInCurrentWave > 0;
         
         foreach (var wave in spawnManagerValues)

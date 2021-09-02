@@ -23,6 +23,7 @@ public class EnemyAI : MonoBehaviour, IDamagable
     private float _speed = 0f;
     private Collider _collider;
     public bool IsAlive { get; set; }
+    public bool isMiniBoss;
     
 
 
@@ -64,6 +65,10 @@ public class EnemyAI : MonoBehaviour, IDamagable
 
     protected IEnumerator DestroyEnemy()
     {
+        if (isMiniBoss)
+        {
+            GameManager.Instance.SetCheckPoint();
+        }
         yield return new WaitForSeconds(1f);
        _collider.gameObject.SetActive(false);
        GameManager.Instance.EnemiesActiveInCurrentWave--;

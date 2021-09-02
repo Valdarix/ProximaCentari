@@ -1,6 +1,10 @@
 
+using System;
+using System.Collections;
 using Unity.Collections;
+using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyWeapon : MonoBehaviour
 {
@@ -9,13 +13,29 @@ public class EnemyWeapon : MonoBehaviour
     public int _fireRate = 1;
     [SerializeField] private AudioClip _SFX;
     private Vector3 _randomLocation;
+    [SerializeField] private GameObject _explosion;
+
+    private Animator _animator;
 
 
     private void Start()
     {
         AudioManager.Instance._audioSource.PlayOneShot(_SFX);
-        //pick a random location and move there. Make sure its on screen and forward.
+        if (_fireRate == 2)
+        {
+            StartCoroutine(AutoBoom());
+        }
+
+        _animator = GetComponent<Animator>();
         GetRandomLocation();
+    }
+
+    private IEnumerator AutoBoom()
+    {
+        yield return new WaitForSeconds(5f);
+        _animator.SetBool("GoBoom", true);
+        yield return new WaitForSeconds(.5f);
+        Destroy(gameObject,.1f);
     }
     
     void Update()
@@ -60,6 +80,12 @@ public class EnemyWeapon : MonoBehaviour
         }
       
     }
+
+    private void GoBoom()
+    {
+        _explosion.SetActive(true);
+    }
+    
     private void OnBecameInvisible()
     {
         Destroy(gameObject);

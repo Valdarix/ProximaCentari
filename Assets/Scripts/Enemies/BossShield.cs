@@ -10,10 +10,12 @@ public class BossShield : MonoBehaviour, IDamagable
     private int _shieldStrength;
     [SerializeField] private GameObject _shield;
     [SerializeField] private AudioClip _shieldDownSFX;
+    [SerializeField] private AudioClip _hitSFX;
+    [SerializeField] private GameObject explosionEffect;
 
     private void Start()
     {
-        _shieldStrength = 50;
+        _shieldStrength = 1500;
         Health = _shieldStrength;
         IsAlive = true;
         _shieldUp = true;
@@ -22,7 +24,8 @@ public class BossShield : MonoBehaviour, IDamagable
     public void Damage(int damageAmount)
     {
         Health -= damageAmount;
-        _shieldUp = (Health > 0);
+        _shieldUp = (Health > 0); 
+        AudioManager.Instance._SFXSource.PlayOneShot(_hitSFX);
         
         if (!_shieldUp && _shield.activeInHierarchy)
         {
@@ -33,6 +36,7 @@ public class BossShield : MonoBehaviour, IDamagable
 
         if (Health <= 0)
         {
+            explosionEffect.SetActive(true);
             IsAlive = false;
             Destroy(gameObject, 0.5f);
         }

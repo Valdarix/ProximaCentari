@@ -39,12 +39,13 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
         _currentPlayerState = PlayerState.Idle;
         
         _anim = GetComponent<Animator>();
-        
+        UpdatePlasmaLevel(0);
+
         Health = 0;
+        IsAlive = true;
         UIManager.Instance.UpdateLifeforce(Health);
        
-        UpdatePlasmaLevel(0);
-       
+        
         _weaponFireRate = weapons[PowerLevel]._fireRate;
     }
 
@@ -58,7 +59,7 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
     
     private void FixedUpdate()
     {
-        if (Input.GetButton("Fire1") && Time.time > _nextTimeWeaponCanFire && PowerLevel >= 0)
+        if (Input.GetButton("Fire1") && Time.time > _nextTimeWeaponCanFire && PowerLevel >= 0 && IsAlive)
         {
             _nextTimeWeaponCanFire = Time.time + _weaponFireRate;
             Instantiate(weapons[PowerLevel], projectileStartPos.transform.position, transform.localRotation );
@@ -126,6 +127,7 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
       
         if (Health < 0)
         {
+            IsAlive = false;
             GetComponent<Player_Move>().UpdatePlayerState(PlayerState.Death);
             GetComponent<AudioSource>().PlayOneShot(_sfxDeath);
             
@@ -135,7 +137,8 @@ public class Player_Move : MonoBehaviour, IDamagable, IUpgradeable
 
     public void UpdatePlasmaLevel(int powerChange)
     {
-        PowerLevel += powerChange;
+        if (PowerLevel < 4)
+            PowerLevel += powerChange;
         Health = PowerLevel;
         UIManager.Instance.UpdateLifeforce(Health);
         

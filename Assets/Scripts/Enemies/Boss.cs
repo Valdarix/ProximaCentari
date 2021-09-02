@@ -20,6 +20,7 @@ public class Boss : MonoBehaviour
     [SerializeField] private GameObject[] _parts;
     private float _speed = 0f;
     private Collider _collider;
+    private bool _lastPase;
     public bool IsAlive { get; set; }
     
 
@@ -116,5 +117,11 @@ public class Boss : MonoBehaviour
             GameManager.Instance.EnemiesActiveInCurrentWave--;
             Destroy(gameObject,0.1f);
         }
+    }
+
+    public void SetLastPhase(bool lastPhase)
+    {
+        _lastPase = lastPhase;
+        _anim.SetBool("LastPhase", _lastPase);
     }
 }
