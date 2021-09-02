@@ -92,12 +92,18 @@ public class MiniBoss : MonoBehaviour, IDamagable
             _shield.SetActive(false);
             _shieldUp = false;
         }
-        else
+        else if (_shieldUp && _shield.activeInHierarchy)
         {
             AudioManager.Instance._SFXSource.PlayOneShot(_shieldHit);
             _anim.SetBool(ShieldActive,true);
         }
         
+        if (!_shieldUp && !_shield.activeInHierarchy)
+        {
+            _anim.SetTrigger("Hit");
+        }
+
+
         if (Health <= 0 && _currentEnemyState == EnemyState.Living)
         { 
             if (_dropPowerUp)

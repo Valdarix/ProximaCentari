@@ -20,7 +20,7 @@ public class EnemyWeapon : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.Instance._audioSource.PlayOneShot(_SFX);
+        AudioManager.Instance._SFXSource.PlayOneShot(_SFX);
         if (_fireRate == 2)
         {
             StartCoroutine(AutoBoom());

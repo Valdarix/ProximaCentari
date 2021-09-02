@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.Instance._audioSource.PlayOneShot(_SFX);
+        AudioManager.Instance._SFXSource.PlayOneShot(_SFX);
     }
     
     void Update()

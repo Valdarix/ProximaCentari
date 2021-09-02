@@ -3,7 +3,10 @@ using System;
 using System.Collections;
 using System.Text;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
+using Random = UnityEngine.Random;
 
 public class EnemyAI : MonoBehaviour, IDamagable
 {
@@ -20,11 +23,13 @@ public class EnemyAI : MonoBehaviour, IDamagable
     [SerializeField] private GameObject _thruster;
     [SerializeField] private GameObject _misslePrefab;
     [SerializeField] private GameObject _missileLaunchPos;
+    [SerializeField] private ScriptableFlightPattern[] _flightPatterns;
+    private PlayableAsset _selectedFlightPattern;
     private float _speed = 0f;
     private Collider _collider;
     public bool IsAlive { get; set; }
 
-
+    private PlayableDirector _director;
 
     public int Health { get; set; }
     private bool _shieldUp;
@@ -49,6 +54,8 @@ public class EnemyAI : MonoBehaviour, IDamagable
         _anim = GetComponent<Animator>();
         _currentEnemyState = EnemyState.Living;
         IsAlive = true;
+        _director = GetComponent<PlayableDirector>();
+        NextPattern();
     }
 
     public void FireWeapon()
@@ -61,6 +68,16 @@ public class EnemyAI : MonoBehaviour, IDamagable
     private void Update() => transform.Translate(Vector3.forward * (_speed * Time.deltaTime)); // not really needed? 
 
     private void OnBecameVisible() => _collider.gameObject.SetActive(true);
+
+    public void NextPattern()
+    {
+        var randomPattern = Random.Range(0, _flightPatterns.Length - 1);
+        Debug.Log(randomPattern);
+        _selectedFlightPattern = _flightPatterns[randomPattern].FlighPattern;
+        _director.playableAsset = _selectedFlightPattern;
+        _director.Play();
+        
+    }
 
     protected IEnumerator DestroyEnemy()
     {

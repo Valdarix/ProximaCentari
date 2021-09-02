@@ -27,10 +27,10 @@ public class BossMain : MonoBehaviour, IDamagable
     
     public void Update()
     {
-     //   if (lastPhase)
-    //    {
-    //        StartCoroutine(SpawnPieces());
-    //    }
+        if (lastPhase)
+        {
+           StartCoroutine(SpawnPieces());
+        }
     }
 
     private IEnumerator SpawnPieces()

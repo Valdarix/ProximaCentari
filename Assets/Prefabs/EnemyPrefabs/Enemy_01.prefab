@@ -156,9 +156,9 @@ GameObject:
   - component: {fileID: 7376799610650704677}
   - component: {fileID: 1961049889955833397}
   - component: {fileID: 7353160566469083104}
-  - component: {fileID: 7353160566469083105}
   - component: {fileID: -6137804933272410145}
   - component: {fileID: 279354298}
+  - component: {fileID: 92611804}
   m_Layer: 0
   m_Name: Enemy_01
   m_TagString: Untagged
@@ -258,6 +258,10 @@ MonoBehaviour:
   _thruster: {fileID: 1753535045670931522}
   _misslePrefab: {fileID: 6744219904724392295, guid: 2bb726cacbf964df48775edf33c662d7, type: 3}
   _missileLaunchPos: {fileID: 1535215011}
+  _flightPatterns:
+  - {fileID: 11400000, guid: 5deefb4d759090e4bb7e73fb785d9b3f, type: 2}
+  - {fileID: 11400000, guid: 8ceb5e85a8068df4a94a73710854f692, type: 2}
+  - {fileID: 11400000, guid: d81343c513409db43a715d5e37643ece, type: 2}
 --- !u!320 &7353160566469083104
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -267,37 +271,18 @@ PlayableDirector:
   m_GameObject: {fileID: 7354080467332996247}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 20eaae899ddaf044ba1d5726b63439f7, type: 2}
+  m_PlayableAsset: {fileID: 0}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 0}
-    value: {fileID: 7353160566469083105}
+    value: {fileID: 0}
   - key: {fileID: 8342061614942115912, guid: 20eaae899ddaf044ba1d5726b63439f7, type: 2}
-    value: {fileID: 7353160566469083105}
+    value: {fileID: 92611804}
   m_ExposedReferences:
     m_References: []
---- !u!95 &7353160566469083105
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7354080467332996247}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e0d515ea782904af1b69cf665fcf731d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &-6137804933272410145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +310,25 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1269116562925425082, guid: 9eafec2478441af418574f3e9e971f8d, type: 3}
+--- !u!95 &92611804
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7354080467332996247}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6db22a5f7a3a0024588fdc512c3673b7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1751951022293459998
 PrefabInstance:
   m_ObjectHideFlags: 0
