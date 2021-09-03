@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987f0af2a1a9b864597c67b16dea9e9d, type: 3}
   m_Name: FlightPattern 2
   m_EditorClassIdentifier: 
-  WhoToMove: {fileID: 7351119471462237871, guid: c7a65d7c64a6d429fa4df97f8beea1c7, type: 3}
+  WhoToMove: {fileID: 92611804, guid: c7a65d7c64a6d429fa4df97f8beea1c7, type: 3}
   FlighPattern: {fileID: 11400000, guid: 5bacfb953c807964d8b071e5db63442d, type: 2}

@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
 using Random = UnityEngine.Random;
 
 public class EnemyAI : MonoBehaviour, IDamagable
@@ -25,11 +26,10 @@ public class EnemyAI : MonoBehaviour, IDamagable
     [SerializeField] private GameObject _missileLaunchPos;
     [SerializeField] private ScriptableFlightPattern[] _flightPatterns;
     private PlayableAsset _selectedFlightPattern;
+    private Animator _selectedTrack;
     private float _speed = 0f;
     private Collider _collider;
     public bool IsAlive { get; set; }
-
-    private PlayableDirector _director;
 
     public int Health { get; set; }
     private bool _shieldUp;
@@ -54,7 +54,7 @@ public class EnemyAI : MonoBehaviour, IDamagable
         _anim = GetComponent<Animator>();
         _currentEnemyState = EnemyState.Living;
         IsAlive = true;
-        _director = GetComponent<PlayableDirector>();
+       
         NextPattern();
     }
 
@@ -71,11 +71,20 @@ public class EnemyAI : MonoBehaviour, IDamagable
 
     public void NextPattern()
     {
+        var _director = GetComponent<PlayableDirector>().playableAsset;
         var randomPattern = Random.Range(0, _flightPatterns.Length - 1);
-        Debug.Log(randomPattern);
-        _selectedFlightPattern = _flightPatterns[randomPattern].FlighPattern;
-        _director.playableAsset = _selectedFlightPattern;
-        _director.Play();
+        var timeLineAsset = _director as TimelineAsset;
+
+        var TrackList = timeLineAsset.GetOutputTracks();
+        var i = 0;
+        foreach (var track in TrackList)
+        {
+            if (randomPattern == track.GetInstanceID())
+            GetComponent<PlayableDirector>().SetGenericBinding(track,gameObject);
+        }
+        
+     
+      
         
     }
 
