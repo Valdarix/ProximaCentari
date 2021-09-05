@@ -51,8 +51,19 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartMusic() => AudioManager.Instance.PlayClip(0);
+    public float DifficultyModifier { get; set; }
+    public void SetDifficulty(GameDifficulty selectedDifficulty)
+    {
+        _currentDifficulty = selectedDifficulty;
 
-    public void SetDifficulty(GameDifficulty selectedDifficulty) => _currentDifficulty = selectedDifficulty;
+        DifficultyModifier = selectedDifficulty switch
+        {
+            GameDifficulty.Easy => 1f,
+            GameDifficulty.Normal => 0f,
+            GameDifficulty.Hard => -1f,
+            _ => DifficultyModifier
+        };
+    }
 
     public GameDifficulty GetCurrentDifficulty() => _currentDifficulty;
 

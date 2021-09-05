@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave1_8 MiniBoss
   m_EditorClassIdentifier: 
   prefabName: Wave08_MiniBoss
-  spawnRate: 1
-  spawnPoint: {x: 0, y: 0, z: 0}
+  spawnRate: 2
+  spawnPoint: {x: -20, y: 0, z: 0}
   entityToSpawn:
   - {fileID: 5138037443494724836, guid: f4c03fd332648404e9d1f5df07eadc7e, type: 3}

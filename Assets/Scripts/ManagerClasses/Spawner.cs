@@ -23,20 +23,22 @@ public class Spawner : MonoBehaviour
                 UIManager.Instance.NextWave();
                 UIManager.Instance.UpdateWaveCount(currentWave);
                 yield return new WaitForSeconds((int)(GameManager.Instance.GetCurrentDifficulty()));
-                if (currentWave == 7)
+                switch (currentWave)
                 {
-                    AudioManager.Instance.PlayClip(3);
+                    case 7:
+                        AudioManager.Instance.PlayClip(3);
+                        break;
+                    case 12:
+                        AudioManager.Instance.PlayClip(2);
+                        break;
                 }
-                if (currentWave == 12)
-                {
-                    AudioManager.Instance.PlayClip(2);
-                }
-                
+
                 var enemiesInCurrentWave = spawnManagerValues[currentWave].entityToSpawn.Length;
                 GameManager.Instance.EnemiesActiveInCurrentWave = enemiesInCurrentWave;
+               
                 for (var i = 0; i < enemiesInCurrentWave; i++)
                 {
-                    yield return new WaitForSeconds(spawnManagerValues[currentWave].spawnRate);
+                    yield return new WaitForSeconds(spawnManagerValues[currentWave].spawnRate + (int)GameManager.Instance.DifficultyModifier);
 
                     var currentEntity = Instantiate(spawnManagerValues[currentWave].entityToSpawn[i], spawnManagerValues[currentWave].spawnPoint, spawnManagerValues[currentWave].entityToSpawn[i].transform.rotation);
               

@@ -5,8 +5,6 @@ using System.Text;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.Timeline;
 using Random = UnityEngine.Random;
 
 public class EnemyAI : MonoBehaviour, IDamagable
@@ -24,20 +22,21 @@ public class EnemyAI : MonoBehaviour, IDamagable
     [SerializeField] private GameObject _thruster;
     [SerializeField] private GameObject _misslePrefab;
     [SerializeField] private GameObject _missileLaunchPos;
-    [SerializeField] private ScriptableFlightPattern[] _flightPatterns;
-    private PlayableAsset _selectedFlightPattern;
-    private Animator _selectedTrack;
+   
     private float _speed = 0f;
     private Collider _collider;
     public bool IsAlive { get; set; }
 
     public int Health { get; set; }
     private bool _shieldUp;
+    private bool _canBeAttacked;
     private Animator _anim;
     
     private Renderer _renderer;
  
     private static readonly int ShieldActive = Animator.StringToHash("ShieldActive");
+
+    private TimelineController flightApproval;
 
     private enum EnemyState
     {
@@ -55,7 +54,13 @@ public class EnemyAI : MonoBehaviour, IDamagable
         _currentEnemyState = EnemyState.Living;
         IsAlive = true;
        
-        NextPattern();
+        flightApproval = GetComponent<TimelineController>();
+          
+        if (flightApproval != null)
+        {
+            flightApproval.NextPattern();
+        }
+        
     }
 
     public void FireWeapon()
@@ -67,25 +72,14 @@ public class EnemyAI : MonoBehaviour, IDamagable
 
     private void Update() => transform.Translate(Vector3.forward * (_speed * Time.deltaTime)); // not really needed? 
 
-    private void OnBecameVisible() => _collider.gameObject.SetActive(true);
+    private void OnBecameVisible() => _canBeAttacked = true;
 
-    public void NextPattern()
+    private void OnBecameInvisible()
     {
-        var _director = GetComponent<PlayableDirector>().playableAsset;
-        var randomPattern = Random.Range(0, _flightPatterns.Length - 1);
-        var timeLineAsset = _director as TimelineAsset;
+        _canBeAttacked = false;
 
-        var TrackList = timeLineAsset.GetOutputTracks();
-        var i = 0;
-        foreach (var track in TrackList)
-        {
-            if (randomPattern == track.GetInstanceID())
-            GetComponent<PlayableDirector>().SetGenericBinding(track,gameObject);
-        }
-        
-     
+        flightApproval.NextPattern();
       
-        
     }
 
     protected IEnumerator DestroyEnemy()
@@ -99,48 +93,49 @@ public class EnemyAI : MonoBehaviour, IDamagable
 
    public void Damage(int damageAmount)
     {
-        Health -= damageAmount;
-        _shieldUp = (Health > _health/2);
+        if (_canBeAttacked)
+        {
+            Health -= damageAmount;
+            _shieldUp = (Health > _health/2);
        
-        if (!_shieldUp && _shield.activeInHierarchy)
-        {
-            AudioManager.Instance._SFXSource.PlayOneShot(_shieldDownSFX);
-            _shield.SetActive(false);
-            _shieldUp = false;
-        }
-        else
-        {
-            AudioManager.Instance._SFXSource.PlayOneShot(_shieldHit);
-            _anim.SetBool(ShieldActive,true);
-        }
-        
-        if (Health <= 0 && _currentEnemyState == EnemyState.Living)
-        { 
-            if (_dropPowerUp)
+            if (!_shieldUp && _shield.activeInHierarchy)
             {
-                Instantiate(_powerUpObj, new Vector3(transform.position.x,transform.position.y, 0), quaternion.identity);
+                AudioManager.Instance._SFXSource.PlayOneShot(_shieldDownSFX);
+                _shield.SetActive(false);
+                _shieldUp = false;
             }
+            else
+            {
+                AudioManager.Instance._SFXSource.PlayOneShot(_shieldHit);
+                _anim.SetBool(ShieldActive,true);
+            }
+        
+            if (Health <= 0 && _currentEnemyState == EnemyState.Living)
+            { 
+                if (_dropPowerUp)
+                {
+                    Instantiate(_powerUpObj, new Vector3(transform.position.x,transform.position.y, 0), quaternion.identity);
+                }
 
-            IsAlive = false;
-            _renderer.material = _dissolveShader;
-            var dissolve = GetComponent<U10PS_DissolveOverTime>();
-            dissolve.enabled = true;
-            AudioManager.Instance._SFXSource.PlayOneShot(_dissolveSFX);
-            GameManager.Instance.UpdateScore(_pointValue);
-            _currentEnemyState = EnemyState.Dead;
-            if (_thruster != null)
-                _thruster.SetActive(false);
-            StartCoroutine(DestroyEnemy());
+                IsAlive = false;
+                _renderer.material = _dissolveShader;
+                var dissolve = GetComponent<U10PS_DissolveOverTime>();
+                dissolve.enabled = true;
+                AudioManager.Instance._SFXSource.PlayOneShot(_dissolveSFX);
+                GameManager.Instance.UpdateScore(_pointValue);
+                _currentEnemyState = EnemyState.Dead;
+                if (_thruster != null)
+                    _thruster.SetActive(false);
+                StartCoroutine(DestroyEnemy());
+            }
         }
     }
     
-    public void ResetShieldBool() //called by the animation event
-    {
-        _anim.SetBool(ShieldActive,false);
-    }
+    public void ResetShieldBool() => _anim.SetBool(ShieldActive,false); //called by animation event of shield hit. 
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.tag);
         if (other.CompareTag("Player") && _currentEnemyState != EnemyState.Dead)
         {
             var hitTarget = other.GetComponent<IDamagable>();
@@ -148,6 +143,11 @@ public class EnemyAI : MonoBehaviour, IDamagable
             hitTarget?.Damage(_crashDamageValue); 
             GameManager.Instance.EnemiesActiveInCurrentWave--;
             Destroy(gameObject,0.1f);
+        }
+        
+        if (other.CompareTag("RespawnBounds") && _currentEnemyState != EnemyState.Dead)
+        {
+            flightApproval.NextPattern();
         }
     }
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8343263642283572119}
   - component: {fileID: 8343263643911191604}
   - component: {fileID: -5079662601541089573}
-  - component: {fileID: 4090859374188962580}
+  - component: {fileID: 6511016860071954517}
   m_Layer: 8
   m_Name: Weapon0
   m_TagString: Untagged
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  _damageAmount: 1
+  _damageAmount: 5
   _fireRate: 0.35
   _SFX: {fileID: 8300000, guid: 2ba5468c0851f7b4f917d07550c82ccd, type: 3}
 --- !u!54 &-5079662601541089573
@@ -139,8 +139,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &4090859374188962580
-BoxCollider:
+--- !u!135 &6511016860071954517
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -150,5 +150,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10.479999, y: 385.46347, z: 0.28239667}
-  m_Center: {x: 10, y: 82.21816, z: -0.0015304238}
+  m_Radius: 4.19
+  m_Center: {x: 7.52, y: -29.16, z: 0.02}

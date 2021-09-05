@@ -7,6 +7,7 @@ TagManager:
   - PostProcess
   - Enemy
   - PowerUp
+  - RespawnBounds
   layers:
   - Default
   - TransparentFX
